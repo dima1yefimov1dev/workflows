@@ -1,0 +1,33 @@
+name: Events demo
+on: 
+  pull_request:
+    types: 
+      - opened
+    branches:
+      - main
+      - 'dev-*'
+      - 'feat/**'
+  push:
+    branches:
+      - main
+      - 'dev-*'
+      - 'feat/**'
+    paths-ignore:
+      - '.github/workflows/*'
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output event data
+        run: echo "${{ toJSON(github.event) }}"
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Linting
+        run: npm lint
+      - name: Build
+        run: npm build
+      - name: Deploy
+        run: echo "DEPLOYING..."
