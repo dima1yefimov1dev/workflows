@@ -1,9 +1,10 @@
 import './App.css'
+import { MainComponent } from './components/main.components'
 
 function App() {
   return (
-   <div className="">hello ci/cd
-    <h3>same</h3>
+   <div className="">
+     < MainComponent />
    </div>
   )
 }
